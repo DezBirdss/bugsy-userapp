@@ -17,11 +17,9 @@ export function VerifyDiscordRequest(clientKey) {
 }
 
 export async function DiscordRequest(endpoint, options) {
-  // append endpoint to root API URL
   const url = 'https://discord.com/api/v10/' + endpoint;
   // Stringify payloads
   if (options.body) options.body = JSON.stringify(options.body);
-  // Use node-fetch to make requests
   const res = await fetch(url, {
     headers: {
       Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
@@ -31,13 +29,11 @@ export async function DiscordRequest(endpoint, options) {
     },
     ...options,
   });
-  // throw API errors
   if (!res.ok) {
     const data = await res.json();
     console.log(res.status);
     throw new Error(JSON.stringify(data));
   }
-  // return original response
   return res;
 }
 
@@ -80,37 +76,32 @@ async function getServerMembers(guildId, limit) {
 export function createPlayerEmbed(profile) {
   return {
     type: 'rich',
-    title: `${profile.username} Profile (lvl ${profile.stats.level})`,
-    color: 0x968b9f,
+    title: `@Bugsbirt`,
+    description: "Bugsbirt/Bugsy is a guy who is building an army and is planning to take over the world.",
+    color: 0x5b65e8,
+    url: `https://discord.com/users/795743076520820776`, 
+    thumbnail: {
+      url: 'https://cdn.discordapp.com/avatars/795743076520820776/6b9d50d21b4209bae5ef666d570aaa2b.png?size=512',
+    },
     fields: [
       {
-        name: `Account created`,
-        value: profile.createdAt,
-        inline: true,
-      },
-      {
-        name: `Last played`,
-        value: profile.lastPlayed,
-        inline: true,
-      },
-      {
-        name: `Global rank`,
-        value: profile.stats.rank,
-        inline: true,
-      },
-      {
-        name: `Combat stats`,
-        value: `:smiley: ${profile.stats.wins} wins / :pensive: ${profile.stats.losses} losses`,
-      },
-      {
-        name: `Realms explored`,
-        value: profile.stats.realms,
-        inline: true,
-      },
-    ],
-    url: 'https://discord.com/developers/docs/intro',
-    thumbnail: {
-      url: 'https://raw.githubusercontent.com/shaydewael/example-app/main/assets/fake-icon.png',
+        name: 'Projects',
+        value: '**Astro Birb** - https://astrobirb.dev',
+        inline: true 
+
+
+      }
+    ]
+  };
+}
+
+export function Avatar(avatar) {
+  return {
+    type: 'rich',
+    color: 0x5b65e8,
+    image: {
+      url: 'https://cdn.discordapp.com/avatars/795743076520820776/6b9d50d21b4209bae5ef666d570aaa2b.png?size=512',
     },
+
   };
 }

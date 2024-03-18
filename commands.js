@@ -2,16 +2,15 @@ import 'dotenv/config';
 import { fakeGameItems } from './game.js';
 import { InstallGlobalCommands } from './utils.js';
 
-// Wiki command for game lookup
 const WIKI_COMMAND = {
-  name: 'wiki',
+  name: 'farm',
   type: 1,
-  description: 'Lookup information in wiki',
+  description: 'Farm crops like a really farmer',
   options: [
     {
       type: 3,
       name: 'item',
-      description: 'Item to lookup',
+      description: 'Item to farm',
       choices: fakeGameItems,
       required: true,
     },
@@ -20,38 +19,45 @@ const WIKI_COMMAND = {
   contexts: [0, 1, 2],
 };
 
-// Leaderboard command, for guild install only
-const LEADERBOARD_COMMAND = {
-  name: 'leaderboard',
-  type: 1,
-  description: 'See server leaderboard',
-  integration_types: [0],
-  contexts: [0],
-};
 
-// Profile command
+
 const PROFILE_COMMAND = {
   name: 'profile',
   type: 1,
-  description: 'See your game inventory and progress',
+  description: 'Description of Bugsy',
+  integration_types: [1],
+  contexts: [0, 1, 2],
+};
+const AVATAR_COMMAND = {
+  name: 'avatar',
+  type: 1,
+  description: 'Your avatar',
   integration_types: [1],
   contexts: [0, 1, 2],
 };
 
-// Link account command
-const LINK_COMMAND = {
-  name: 'link',
+const SAY_COMMAND = {
+  name: 'say',
   type: 1,
-  description: 'Link your Quests of Wumpus account with your Discord profile',
+  description: 'Echoes back a message.',
   integration_types: [1],
-  contexts: [1],
+  contexts: [0, 1, 2],
+  options: [
+    {
+      name: 'message',
+      description: 'The message to echo back.',
+      type: 3,
+      required: true
+    }
+  ]
 };
-
 const ALL_COMMANDS = [
   WIKI_COMMAND,
-  LEADERBOARD_COMMAND,
   PROFILE_COMMAND,
-  LINK_COMMAND,
+  AVATAR_COMMAND,
+  SAY_COMMAND
 ];
+
+
 
 InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS);
