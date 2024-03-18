@@ -51,11 +51,29 @@ const SAY_COMMAND = {
     }
   ]
 };
+
+const RATE_COMMAND = {
+  name: 'rate',
+  type: 1,
+  description: 'I\'ll rate someone for you!',
+  integration_types: [1],
+  contexts: [0, 1, 2],
+  options: [
+    {
+      name: 'user',
+      description: 'The user you wanna rate',
+      type: 6,
+      required: true
+    }
+  ]
+};
+
 const ALL_COMMANDS = [
   WIKI_COMMAND,
   PROFILE_COMMAND,
   AVATAR_COMMAND,
-  SAY_COMMAND
+  SAY_COMMAND,
+  RATE_COMMAND
 ];
 
 

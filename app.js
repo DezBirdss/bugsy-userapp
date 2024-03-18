@@ -47,6 +47,27 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
+    
+    if (name === 'rate') {
+      console.log('I know');
+      const options = data.options;
+      const userOption = options.find(option => option.name === 'user');
+      const userId = userOption.value;
+      console.log('User ID:', userId);
+      console.log('User Option:', userOption);
+    
+      const rating = Math.floor(Math.random() * 10) + 1;
+    
+      const message = `👻 I rate <@${userId}> **${rating}/10**!`;
+    
+      return res.json({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: message,
+        },
+      });
+    }
+    
 
     if (name === 'say') {
       const { value: message } = data.options[0];
