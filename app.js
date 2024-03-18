@@ -82,7 +82,12 @@ app.post('/interactions', async function (req, res) {
     }
 
     if (name === 'avatar') {
-      const user = data.targetId || req.body.member.user.id;
+      const user = req.body.member ? req.body.member.user.id : null;
+    if (!user) {
+     console.error('User information not found in request body');
+    } else {
+  console.log('User ID:', user);
+}
       const avatarUrl = `https://cdn.discordapp.com/avatars/${user}/${req.body.member.user.avatar}.png`;
     
       const embed = Avatar(avatarUrl)
