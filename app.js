@@ -15,6 +15,7 @@ app.post('/interactions', async function (req, res) {
     return res.send({ type: InteractionResponseType.PONG });
   }
 
+
   if (type === InteractionType.APPLICATION_COMMAND) {
     const { name } = data;
 
@@ -30,9 +31,7 @@ app.post('/interactions', async function (req, res) {
       });
     }
     
-    function createProfileMessage() {
-      return "# <a:Conure3:1181758342230712351> @Bugbirt\n> Bugsy is a person who is currently building an army and planning to take over the world.\n\n## 🏆 Achievements\n- Took over Canada\n- Taken over manhatten with hamsters\n- Made an empire\n\n## 🧭 Projects\n<:Scaredbirb:1178005514584596580> <https://astrobirb.dev>"
-    }   
+
 
 
     if (name === 'farm') {
@@ -68,6 +67,16 @@ app.post('/interactions', async function (req, res) {
       });
     }
     
+    if (name === 'ping') {
+      const startTime = Date.now();
+
+      return res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: {
+              content: `PONG! Latency: ${Date.now() - startTime}ms`
+          }
+      });
+  }
 
     if (name === 'say') {
       const { value: message } = data.options[0];
@@ -80,32 +89,9 @@ app.post('/interactions', async function (req, res) {
         }
       });
     }
-
-    if (name === 'avatar') {
-      const user = req.body.member ? req.body.member.user.id : null;
-    if (!user) {
-     console.error('User information not found in request body');
-    } else {
-  console.log('User ID:', user);
-}
-      const avatarUrl = `https://cdn.discordapp.com/avatars/${user}/${req.body.member.user.avatar}.png`;
-    
-      const embed = Avatar(avatarUrl)
-
-    
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          embeds: [embed]
-        }
-      });
-    }    
   }
-
-
-
-
 });
+
 
 app.listen(PORT, () => {
   console.log('Listening on port', PORT);

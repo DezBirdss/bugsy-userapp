@@ -20,6 +20,15 @@ const WIKI_COMMAND = {
 };
 
 
+const pingCommand = {
+  name: 'ping',
+  type: 1,
+  description: 'Replies with Pong!',
+  integration_types: [1],
+  contexts: [0, 1, 2],
+};
+
+
 
 const PROFILE_COMMAND = {
   name: 'profile',
@@ -28,13 +37,7 @@ const PROFILE_COMMAND = {
   integration_types: [1],
   contexts: [0, 1, 2],
 };
-const AVATAR_COMMAND = {
-  name: 'avatar',
-  type: 1,
-  description: 'Your avatar',
-  integration_types: [1],
-  contexts: [0, 1, 2],
-};
+
 
 const SAY_COMMAND = {
   name: 'say',
@@ -71,9 +74,9 @@ const RATE_COMMAND = {
 const ALL_COMMANDS = [
   WIKI_COMMAND,
   PROFILE_COMMAND,
-  AVATAR_COMMAND,
   SAY_COMMAND,
-  RATE_COMMAND
+  RATE_COMMAND,
+  pingCommand
 ];
 
 
