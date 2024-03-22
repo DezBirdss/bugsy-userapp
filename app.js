@@ -31,8 +31,19 @@ app.post('/interactions', async function (req, res) {
       });
     }
     
-
-
+    if (name === 'ping') {
+      res.send({
+        type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
+      });
+    
+      const start = Date.now();
+      const end = Date.now();
+      const pingTime = end - start;
+    
+      res.editOriginal({
+        content: `🏓 Pong! Took **${pingTime}**ms.`,
+      });
+    }
 
     if (name === 'farm') {
       const option = data.options[0];
@@ -67,16 +78,7 @@ app.post('/interactions', async function (req, res) {
       });
     }
     
-    if (name === 'ping') {
-      const startTime = Date.now();
 
-      return res.send({
-          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-          data: {
-              content: `PONG! Latency: ${Date.now() - startTime}ms`
-          }
-      });
-  }
 
     if (name === 'say') {
       const { value: message } = data.options[0];
