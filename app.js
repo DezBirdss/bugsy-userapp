@@ -31,23 +31,7 @@ app.post('/interactions', async function (req, res) {
       });
     }
     
-    if (name === 'ping') {
-      res.send({
-        type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
-      });
-    
-      const start = Date.now();
-      await new Promise(resolve => setTimeout(resolve, 1000)); 
-      const end = Date.now();
-      const pingTime = end - start;
-    
-      res.send({
-        type: InteractionResponseType.UPDATE_MESSAGE,
-        data: {
-          content: `🏓 Pong! Took **${pingTime}**ms.`,
-        }
-      });
-    }
+
     
 
     if (name === 'farm') {
