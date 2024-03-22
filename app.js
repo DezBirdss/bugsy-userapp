@@ -32,12 +32,12 @@ app.post('/interactions', async function (req, res) {
     }
     
     if (name === 'ping') {
-      const start = Date.now();
       res.send({
         type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
       });
     
       setTimeout(() => {
+        const start = Date.now();
         const end = Date.now();
         const pingTime = end - start;
     
@@ -49,6 +49,7 @@ app.post('/interactions', async function (req, res) {
         });
       }, 1000);
     }
+    
 
     if (name === 'farm') {
       const option = data.options[0];
