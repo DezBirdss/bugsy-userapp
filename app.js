@@ -32,13 +32,13 @@ app.post('/interactions', async function (req, res) {
     }
     
     if (name === 'ping') {
-      res.send({
-        type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
-      });
-    
       const start = Date.now();
       const end = Date.now();
       const pingTime = end - start;
+    
+      res.send({
+        type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
+      });
     
       res.editOriginal({
         content: `🏓 Pong! Took **${pingTime}**ms.`,
