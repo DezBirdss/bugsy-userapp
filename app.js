@@ -36,18 +36,17 @@ app.post('/interactions', async function (req, res) {
         type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
       });
     
-      setTimeout(() => {
-        const start = Date.now();
-        const end = Date.now();
-        const pingTime = end - start;
+      const start = Date.now();
+      await new Promise(resolve => setTimeout(resolve, 1000)); 
+      const end = Date.now();
+      const pingTime = end - start;
     
-        res.send({
-          type: InteractionResponseType.UPDATE_MESSAGE,
-          data: {
-            content: `🏓 Pong! Took **${pingTime}**ms.`,
-          },
-        });
-      }, 1000);
+      res.send({
+        type: InteractionResponseType.UPDATE_MESSAGE,
+        data: {
+          content: `🏓 Pong! Took **${pingTime}**ms.`,
+        }
+      });
     }
     
 
